@@ -20,7 +20,7 @@ public class Rockfall : MonoBehaviour
         if(coll.tag == "Player" && !hasFallen)
         {
             // Create 3 rocks at the position of the parent but scattered 
-            for(int i=0; i<2; i++)
+            for(int i=0; i<3; i++)
             {
                 GameObject newRockfallPiece = Instantiate(rockfallPieceGO, new Vector2(transform.position.x + Random.Range(-0.5f, 0.5f), transform.position.y + Random.Range(-0.5f, 0f)), Quaternion.identity);
             }
