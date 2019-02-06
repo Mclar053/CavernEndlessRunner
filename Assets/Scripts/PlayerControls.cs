@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerControls : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class PlayerControls : MonoBehaviour
     public bool isPlayerLeft = true;
     bool moving = false;
     bool dead = false;
+    bool switchSides = false;
 
 
     Vector2 newPosition;
@@ -56,11 +58,13 @@ public class PlayerControls : MonoBehaviour
                     { // If the player is on the right and the user touched the left side
                         totalMovement.x = -4f;
                         isPlayerLeft = true; // Player is now on the left
+                        switchSides = true;
                     }
                     else if (isPlayerLeft && !userTouchedLeft)
                     { // If the player is on the left and the user touched the right side
                         totalMovement.x = 4f;
                         isPlayerLeft = false; // Player is now on the right
+                        switchSides = true;
                     }
 
                     // Set the new position
@@ -70,7 +74,7 @@ public class PlayerControls : MonoBehaviour
 
                     if (touch.position.y > 3f * Screen.height/4f)
                     {
-                        ResetPlayer();
+                        SceneManager.LoadScene("SampleScene");
                     }
 
                 }
@@ -83,13 +87,17 @@ public class PlayerControls : MonoBehaviour
             if (transform.position.Equals(newPosition))
             {
                 moving = false;
+                switchSides = false;
             }
         }
     }
 
     public void KillPlayer()
     {
-        dead = true;
+        if (!switchSides)
+        {
+            dead = true;
+        }
     }
 
     public void ResetPlayer()
