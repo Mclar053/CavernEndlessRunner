@@ -27,6 +27,7 @@ public class Rockfall : MonoBehaviour
 
             // The rocks have fallen
             hasFallen = true;
+            Destroy(gameObject);
         }
     }
 }
