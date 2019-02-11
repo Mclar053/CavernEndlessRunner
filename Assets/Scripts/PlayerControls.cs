@@ -74,8 +74,7 @@ public class PlayerControls : MonoBehaviour
                 newPosition = new Vector2(transform.position.x + totalMovement.x, transform.position.y + totalMovement.y);
 
                 // Increase score
-                score++;
-                textObject.text = "Score: " + score;
+                addScore(1);
 
                 moving = true;
 
@@ -112,5 +111,11 @@ public class PlayerControls : MonoBehaviour
         dead = false;
         moving = false;
         isPlayerLeft = true;
+    }
+
+    public void addScore(int _points)
+    {
+        score += _points;
+        textObject.text = "Score: " + score;
     }
 }

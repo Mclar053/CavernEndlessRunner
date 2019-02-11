@@ -75,7 +75,7 @@ public class Platform : MonoBehaviour
              * Work to do:
              * - Platforms are limited to 1 rockfall
              * - Doesn't solve between 2 platforms though
-             * 
+             * - No more than 3 lasers together
              */
 
             // Instantiate the obstacle
