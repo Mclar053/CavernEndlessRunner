@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayerControls : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class PlayerControls : MonoBehaviour
     bool dead = false;
     bool switchSides = false;
 
+    public Text textObject;
+    int score;
 
     Vector2 newPosition;
     float t;
@@ -18,7 +21,7 @@ public class PlayerControls : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        score = 0;
     }
 
     // Update is called once per frame
@@ -69,6 +72,10 @@ public class PlayerControls : MonoBehaviour
 
                 // Set the new position
                 newPosition = new Vector2(transform.position.x + totalMovement.x, transform.position.y + totalMovement.y);
+
+                // Increase score
+                score++;
+                textObject.text = "Score: " + score;
 
                 moving = true;
 

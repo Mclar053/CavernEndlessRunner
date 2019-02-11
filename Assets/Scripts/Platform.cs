@@ -5,23 +5,26 @@ using UnityEngine;
 public class Platform : MonoBehaviour
 {
 
+    /* PUBLIC */
+    public List<GameObject> availableObstaclesGOs; // Obstacle templates available to the platform
+
+    /* PRIVATE */
     List<GameObject> obstaclesGOs; // Obstacles on the platform
-    List<GameObject> availableObstaclesGOs; // Obstacle templates available to the platform
     int timesGenerated; // Number of times the platform has regenerated
     int obstaclesToAdd; // Remaining number of obstacles to add (used during platfrom generation)
 
     readonly int HEIGHT_OF_PLATFORM = 10;
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         obstaclesGOs = new List<GameObject>();
         timesGenerated = 0;
-        GeneratePlatformTerrain();
+        RefreshPlatform();
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         
     }
@@ -29,7 +32,7 @@ public class Platform : MonoBehaviour
     /// <summary>
     /// Generates the platform terrain.
     /// </summary>
-    void GeneratePlatformTerrain()
+    private void GeneratePlatformTerrain()
     {
         // Create a list of taken positions
         List<int> takenPositions = new List<int>();
@@ -58,7 +61,7 @@ public class Platform : MonoBehaviour
             remainingPositions.RemoveAt(pendingPosition);
 
 
-            CavernPostion cavernPostion = (CavernPostion)Random.Range(0, 1); // Pick side
+            CavernPostion cavernPostion = (CavernPostion)Random.Range(0, 2); // Pick side
             if (cavernPostion == CavernPostion.Left)
             {
                 placementPosition.x = -2;
@@ -68,18 +71,31 @@ public class Platform : MonoBehaviour
                 placementPosition.x = 2;
             }
 
-            // Figure out where the obstacle goes
-            // Instantiate the obstacle
-            // Set the parent to this platform
+            /*
+             * Work to do:
+             * - Platforms are limited to 1 rockfall
+             * - Doesn't solve between 2 platforms though
+             * 
+             */
 
-            //GameObject toInstantiate = Instantiate(availableObstaclesGOs[randomObstacle],)
+            // Instantiate the obstacle
+            GameObject toInstantiate = Instantiate(availableObstaclesGOs[randomObstacle]);
+
+            // Set the parent to the current platform
+            toInstantiate.transform.SetParent(transform);
+
+            // Set the position of the obstacle relative to the platform
+            toInstantiate.transform.localPosition = placementPosition;
+
+            // Add the obstacle to the platforms list
+            obstaclesGOs.Add(toInstantiate);
         }
     }
 
     /// <summary>
     /// Refreshs the platform.
     /// </summary>
-    void RefreshPlatform()
+    private void RefreshPlatform()
     {
         // Remove all obstacles from the platform
         foreach(GameObject obstacle in obstaclesGOs)
@@ -87,6 +103,8 @@ public class Platform : MonoBehaviour
             Destroy(obstacle);
         }
         obstaclesGOs.Clear();
+
+        GeneratePlatformTerrain();
     }
 
     /// <summary>
@@ -94,7 +112,19 @@ public class Platform : MonoBehaviour
     /// </summary>
     private void Reset()
     {
+        timesGenerated = 0;
+        RefreshPlatform();
+    }
 
+    private void OnTriggerExit2D(Collider2D coll)
+    {
+        if(coll.gameObject.tag == "Player")
+        {
+            Vector2 newPosition = transform.position;
+            newPosition.y += HEIGHT_OF_PLATFORM * 3;
+            transform.position = newPosition;
+            RefreshPlatform();
+        }
     }
 
     enum CavernPostion
