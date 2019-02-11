@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - ScoreText
+  - Score
   layers:
   - Default
   - TransparentFX

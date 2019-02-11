@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4897533433024626100}
   - component: {fileID: 4897533433024626101}
   m_Layer: 0
-  m_Name: Platform2
+  m_Name: Platform_Temp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -50,6 +50,7 @@ MonoBehaviour:
   - {fileID: 8964161869876503992, guid: f5243c0204ae24bf4bcb0841add367be, type: 3}
   - {fileID: 4317779018947613831, guid: bf95f3f18a0fd40cfb2a57e1c672b22e, type: 3}
   - {fileID: 7109410239621577597, guid: 0d9401147ad604300a8599a338ff13cb, type: 3}
+  - {fileID: 4421564352991090745, guid: 60bf8e53153e34ef8b97a3b22c15de41, type: 3}
 --- !u!61 &4897533433024626100
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -74,7 +75,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 1
   serializedVersion: 2
-  m_Size: {x: 6, y: 10}
+  m_Size: {x: 6, y: 20}
   m_EdgeRadius: 0
 --- !u!50 &4897533433024626101
 Rigidbody2D:
