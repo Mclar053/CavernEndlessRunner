@@ -2,14 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Rockfall : MonoBehaviour
+public class Rockfall : Obstacle
 {
     public GameObject rockfallPieceGO;
     bool hasFallen;
 
+    Rockfall()
+    {
+        EntityName = EntityType.Rockfall;
+    }
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         hasFallen = false;
     }

@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Gem : MonoBehaviour
+public class Gem : EntityTile
 {
     private int score;
 
-    private void Start()
+    Gem()
     {
         score = 10;
+        EntityName = EntityType.Gem;
     }
 
     private void OnTriggerEnter2D(Collider2D coll)

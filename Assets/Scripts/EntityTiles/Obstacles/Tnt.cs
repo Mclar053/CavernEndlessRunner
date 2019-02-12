@@ -2,20 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Tnt : MonoBehaviour
+public class Tnt : Obstacle
 {
     public GameObject ExplosionGO;
 
     bool activated;
-    float fuseTime;
+    readonly float fuseTime;
     float activatedTime;
 
-    // Start is called before the first frame update
-    void Start()
+    Tnt()
     {
         activated = false;
         fuseTime = 1f;
+        EntityName = EntityType.Tnt;
     }
+
+
 
     // Update is called once per frame
     void Update()

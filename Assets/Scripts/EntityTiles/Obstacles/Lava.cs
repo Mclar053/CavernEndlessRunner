@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Lava : MonoBehaviour
+public class Lava : Obstacle
 {
 
     public GameObject PlayerGO;
