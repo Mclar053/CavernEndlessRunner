@@ -4,10 +4,14 @@ using UnityEngine;
 
 public class RockfallPiece : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public List<Sprite> sprites = new List<Sprite>();
+
     void Start()
     {
-        
+        int randomSprite = Random.Range(0, sprites.Count);
+        bool flip = Random.Range(0, 10) > 5;
+        GetComponent<SpriteRenderer>().sprite = sprites[randomSprite];
+        GetComponent<SpriteRenderer>().flipX = flip;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

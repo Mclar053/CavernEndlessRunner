@@ -92,19 +92,19 @@ public class Platform : MonoBehaviour
             placementPosition.y = remainingPositions[pendingPosition];
             remainingPositions.RemoveAt(pendingPosition);
 
+            // Instantiate the obstacle
+            GameObject toInstantiate = Instantiate(availableObstaclesGOs[randomObstacle]);
 
             CavernPostion cavernPostion = (CavernPostion)Random.Range(0, 2); // Pick side
             if (cavernPostion == CavernPostion.Left)
             {
                 placementPosition.x = -2;
             }
-            else if(cavernPostion == CavernPostion.Right)
+            else if (cavernPostion == CavernPostion.Right)
             {
                 placementPosition.x = 2;
+                toInstantiate.GetComponent<SpriteRenderer>().flipX = true;
             }
-
-            // Instantiate the obstacle
-            GameObject toInstantiate = Instantiate(availableObstaclesGOs[randomObstacle]);
 
             // Set the parent to the current platform
             toInstantiate.transform.SetParent(transform);

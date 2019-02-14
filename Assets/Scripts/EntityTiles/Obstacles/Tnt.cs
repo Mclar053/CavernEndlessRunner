@@ -5,16 +5,20 @@ using UnityEngine;
 public class Tnt : Obstacle
 {
     public GameObject ExplosionGO;
+    public Sprite InactiveSprite,ActivateSprite;
 
     bool activated;
     readonly float fuseTime;
-    float activatedTime;
+    float activatedTime, flickerTime;
+    bool flicker;
 
     Tnt()
     {
+        flicker = false;
         activated = false;
         fuseTime = 1f;
         EntityName = EntityType.Tnt;
+        flickerTime = 0f;
     }
 
 
@@ -24,7 +28,21 @@ public class Tnt : Obstacle
     {
         if (activated)
         {
-            GetComponent<SpriteRenderer>().color = new Color(255, Mathf.Lerp(0, 255, Time.time - (activatedTime + fuseTime)), Mathf.Lerp(0, 255, Time.time - (activatedTime + fuseTime)));
+            if (flickerTime + 0.5 < Time.time)
+            {
+                flicker = !flicker;
+                if (flicker)
+                {
+                    GetComponent<SpriteRenderer>().sprite = ActivateSprite;
+                }
+                else
+                {
+                    GetComponent<SpriteRenderer>().sprite = InactiveSprite;
+                }
+                flickerTime = Time.time;
+            }
+
+
             if (activatedTime + fuseTime < Time.time)
             {
                 Explode();
