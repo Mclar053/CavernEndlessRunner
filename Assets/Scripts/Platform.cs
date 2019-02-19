@@ -7,6 +7,7 @@ public class Platform : MonoBehaviour
 
     /* PUBLIC */
     public List<GameObject> availableObstaclesGOs; // Obstacle templates available to the platform
+    public List<GameObject> wallGOs;
 
     /* PRIVATE */
     List<GameObject> obstaclesGOs; // Obstacles on the platform
@@ -22,6 +23,7 @@ public class Platform : MonoBehaviour
         obstaclesGOs = new List<GameObject>();
         timesGenerated = 0;
         RefreshPlatform();
+        CreateWalls();
     }
 
     // Update is called once per frame
@@ -145,6 +147,24 @@ public class Platform : MonoBehaviour
         obstacleCounter.Clear();
 
         GeneratePlatformTerrain();
+    }
+
+    private void CreateWalls()
+    {
+        for(float i=-HEIGHT_OF_PLATFORM/2f; i<HEIGHT_OF_PLATFORM/2f; i+=0.5f)
+        {
+            int randomWall = Random.Range(0, wallGOs.Count);
+            GameObject toInstantiateLeft = Instantiate(wallGOs[randomWall]);
+            GameObject toInstantiateRight = Instantiate(wallGOs[randomWall]);
+
+            // Set the parent to the current platform
+            toInstantiateLeft.transform.SetParent(transform);
+            toInstantiateRight.transform.SetParent(transform);
+
+            // Set the position of the obstacle relative to the platform
+            toInstantiateLeft.transform.localPosition = new Vector2(2.5f, i);
+            toInstantiateRight.transform.localPosition = new Vector2(-2.5f, i);
+        }
     }
 
     /// <summary>
