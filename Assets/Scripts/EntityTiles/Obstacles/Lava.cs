@@ -17,12 +17,15 @@ public class Lava : Obstacle
     // Update is called once per frame
     void Update()
     {
-        if (Mathf.Abs(PlayerGO.transform.position.y - transform.position.y) >= 10)
+        if (transform.position.y - PlayerGO.transform.position.y < 1)
         {
-            transform.position = new Vector2(0, PlayerGO.transform.position.y - 10);
-        }
+            if (Mathf.Abs(PlayerGO.transform.position.y - transform.position.y) >= 10)
+            {
+                transform.position = new Vector2(0, PlayerGO.transform.position.y - 10);
+            }
 
-        transform.Translate(Vector2.up * Time.deltaTime * speed, Space.World);
+            transform.Translate(Vector2.up * Time.deltaTime * speed, Space.World);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
