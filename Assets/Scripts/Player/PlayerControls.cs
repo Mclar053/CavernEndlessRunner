@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayerControls : MonoBehaviour
 {
@@ -11,6 +12,9 @@ public class PlayerControls : MonoBehaviour
     bool dead = false;
     bool switchSides = false;
 
+    public GameObject endGameDisplay;
+    public Text textObject;
+    int score;
 
     Vector2 newPosition;
     float t;
@@ -18,30 +22,27 @@ public class PlayerControls : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        score = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
-        // if(Input.GetMouseButtonDown(0)) {
-        //     Debug.Log("1");
-        // }
+
+        // Take the first input given by the user
+        Touch touch = Input.touches[0];
 
         if (dead)
         {
-            GetComponent<SpriteRenderer>().color = new Color(0f,0f,0f);
+            GetComponent<SpriteRenderer>().color = new Color(0f, 0f, 0f);
         }
         else
         {
-            GetComponent<SpriteRenderer>().color = new Color(255,255,255);
+            GetComponent<SpriteRenderer>().color = new Color(255, 255, 255);
         }
 
-        if (!moving)
+        if (!moving && !dead)
         {
-            // Take the first input given by the user
-            Touch touch = Input.touches[0];
-
             // Check the user has tapped the screen
             if (touch.phase == TouchPhase.Began)
             {
@@ -70,18 +71,16 @@ public class PlayerControls : MonoBehaviour
                 // Set the new position
                 newPosition = new Vector2(transform.position.x + totalMovement.x, transform.position.y + totalMovement.y);
 
-                moving = true;
+                // Increase score
+                addScore(1);
 
-                if (touch.position.y > 3f * Screen.height/4f)
-                {
-                    SceneManager.LoadScene("SampleScene");
-                }
+                moving = true;
 
             }
         }
         else
         {
-            t += Time.deltaTime / 0.1f;
+            t += Time.deltaTime / 0.05f;
             transform.position = Vector2.Lerp(transform.position, newPosition, t);
             if (transform.position.Equals(newPosition))
             {
@@ -96,6 +95,7 @@ public class PlayerControls : MonoBehaviour
         if (!switchSides)
         {
             dead = true;
+            endGameDisplay.SetActive(true);
         }
     }
 
@@ -105,5 +105,11 @@ public class PlayerControls : MonoBehaviour
         dead = false;
         moving = false;
         isPlayerLeft = true;
+    }
+
+    public void addScore(int _points)
+    {
+        score += _points;
+        textObject.text = "Score: " + score;
     }
 }

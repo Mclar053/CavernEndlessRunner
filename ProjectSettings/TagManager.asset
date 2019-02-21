@@ -3,7 +3,9 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - ScoreText
+  - Score
   layers:
   - Default
   - TransparentFX
@@ -13,10 +15,10 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
-  - 
+  - BackWall
+  - Player
+  - Obstacles
+  - SideWalls
   - 
   - 
   - 
@@ -40,4 +42,22 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Backwall
+    uniqueID: 1459961169
+    locked: 0
+  - name: Obstacles
+    uniqueID: 3711016667
+    locked: 0
+  - name: Player
+    uniqueID: 128271865
+    locked: 0
+  - name: Lava
+    uniqueID: 672740119
+    locked: 0
+  - name: Sidewalls
+    uniqueID: 2216491767
+    locked: 0
+  - name: Particles
+    uniqueID: 1561122445
     locked: 0

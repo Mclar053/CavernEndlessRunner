@@ -2,27 +2,47 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Tnt : MonoBehaviour
+public class Tnt : Obstacle
 {
     public GameObject ExplosionGO;
+    public Sprite InactiveSprite,ActivateSprite;
 
     bool activated;
-    float fuseTime;
-    float activatedTime;
+    readonly float fuseTime;
+    float activatedTime, flickerTime;
+    bool flicker;
 
-    // Start is called before the first frame update
-    void Start()
+    Tnt()
     {
+        flicker = false;
         activated = false;
         fuseTime = 1f;
+        EntityName = EntityType.Tnt;
+        flickerTime = 0f;
     }
+
+
 
     // Update is called once per frame
     void Update()
     {
         if (activated)
         {
-            GetComponent<SpriteRenderer>().color = new Color(255, Mathf.Lerp(0, 255, Time.time - (activatedTime + fuseTime)), Mathf.Lerp(0, 255, Time.time - (activatedTime + fuseTime)));
+            if (flickerTime + 0.5 < Time.time)
+            {
+                flicker = !flicker;
+                if (flicker)
+                {
+                    GetComponent<SpriteRenderer>().sprite = ActivateSprite;
+                }
+                else
+                {
+                    GetComponent<SpriteRenderer>().sprite = InactiveSprite;
+                }
+                flickerTime = Time.time;
+            }
+
+
             if (activatedTime + fuseTime < Time.time)
             {
                 Explode();

@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Spikes : MonoBehaviour
+public class Spikes : Obstacle
 {
-    // Start is called before the first frame update
-    void Start()
+
+    Spikes()
     {
-        
+        EntityName = EntityType.Spikes;
     }
 
     void OnTriggerStay2D(Collider2D coll)

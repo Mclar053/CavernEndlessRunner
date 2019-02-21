@@ -2,15 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Laser : MonoBehaviour
+public class Laser : Obstacle
 {
     public GameObject LaserBeamGO;
 
     public float chargeTime;
     float lastActivated;
 
-    // Start is called before the first frame update
-    void Start()
+    Laser()
+    {
+        EntityName = EntityType.Laser;
+    }
+
+    private void Start()
     {
         chargeTime = 3f;
         lastActivated = 0f;
