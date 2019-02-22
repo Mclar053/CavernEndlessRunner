@@ -96,6 +96,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rockfallPieceGO: {fileID: 2906720222294474227, guid: 0777ac1582db74d788496744534982eb,
     type: 3}
+  RockfallCrackSprite: {fileID: 21300032, guid: 037f2e7e885e74bf095551df3c51fbd8,
+    type: 3}
 --- !u!61 &8964161869876503997
 BoxCollider2D:
   m_ObjectHideFlags: 0

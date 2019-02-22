@@ -6,6 +6,7 @@ TagManager:
   tags:
   - ScoreText
   - Score
+  - Lava
   layers:
   - Default
   - TransparentFX
@@ -45,6 +46,9 @@ TagManager:
     locked: 0
   - name: Backwall
     uniqueID: 1459961169
+    locked: 0
+  - name: Laserbeam
+    uniqueID: 3701723511
     locked: 0
   - name: Obstacles
     uniqueID: 3711016667
