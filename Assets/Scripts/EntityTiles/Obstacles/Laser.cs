@@ -8,7 +8,7 @@ public class Laser : Obstacle
     public List<Sprite> LaserSprites;
 
     public float chargeTime;
-    float lastActivated;
+    float lastActivated, delay;
 
     Laser()
     {
@@ -18,7 +18,8 @@ public class Laser : Obstacle
     private void Start()
     {
         chargeTime = 3f;
-        lastActivated = 0f;
+        delay = Random.Range(0f, 1.5f);
+        lastActivated = delay;
     }
 
     // Update is called once per frame
@@ -29,7 +30,7 @@ public class Laser : Obstacle
         {
             // Create the laser beam
             Instantiate(LaserBeamGO, new Vector2(0, transform.position.y), Quaternion.identity);
-            lastActivated = Time.time;
+            lastActivated = Time.time + delay;
             GetComponent<SpriteRenderer>().sprite = LaserSprites[0];
         }
         else if (lastActivated + (chargeTime * 3 / 4) < Time.time)

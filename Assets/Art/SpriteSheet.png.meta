@@ -19,6 +19,7 @@ TextureImporter:
     21300028: SpriteSheet_14
     21300030: SpriteSheet_15
     21300032: Rockfall_Crack
+    21300034: Gem
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -411,13 +412,33 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
       spriteID: 68d48c24c696d4155b4413417a32861e
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gem
+      rect:
+        serializedVersion: 2
+        x: 299
+        y: 302
+        width: 18
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 115872dbbc67b4f36b1f02d800c8b3ff
       vertices: []
       indices: 
       edges: []
