@@ -14,15 +14,21 @@ public class PlayerControls : MonoBehaviour
 
     public GameObject endGameDisplay;
     public Text textObject;
+    public Text highScore;
     int score;
+    public Text newHighScoreText;
 
     Vector2 newPosition;
     float t;
 
+    Scoreboard scoreboard;
+
     // Start is called before the first frame update
     void Start()
     {
+        scoreboard = new Scoreboard();
         score = 0;
+        highScore.text = "Highscore: " + scoreboard.GetScore();
     }
 
     // Update is called once per frame
@@ -72,7 +78,7 @@ public class PlayerControls : MonoBehaviour
                 newPosition = new Vector2(transform.position.x + totalMovement.x, transform.position.y + totalMovement.y);
 
                 // Increase score
-                addScore(1);
+                AddScore(1);
 
                 moving = true;
 
@@ -95,6 +101,14 @@ public class PlayerControls : MonoBehaviour
         if (!switchSides)
         {
             dead = true;
+
+            if (scoreboard.SetScore(score))
+            {
+                highScore.text = "Highscore: " + scoreboard.GetScore();
+                highScore.color = new Color(0, 255, 0);
+                newHighScoreText.gameObject.SetActive(true);
+            }
+
             endGameDisplay.SetActive(true);
         }
     }
@@ -107,7 +121,7 @@ public class PlayerControls : MonoBehaviour
         isPlayerLeft = true;
     }
 
-    public void addScore(int _points)
+    public void AddScore(int _points)
     {
         score += _points;
         textObject.text = "Score: " + score;

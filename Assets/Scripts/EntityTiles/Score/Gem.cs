@@ -16,7 +16,7 @@ public class Gem : EntityTile
     {
         if (coll.gameObject.tag == "Player")
         {
-            coll.GetComponent<PlayerControls>().addScore(score);
+            coll.GetComponent<PlayerControls>().AddScore(score);
             Destroy(gameObject);
         }
     }
