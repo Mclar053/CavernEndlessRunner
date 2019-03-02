@@ -1656,6 +1656,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   soundText: {fileID: 185690437}
   settingsKey: Sound
+  soundTag: Sound
+  audioPlayer: {fileID: 0}
 --- !u!1 &1671783294
 GameObject:
   m_ObjectHideFlags: 0
@@ -2110,3 +2112,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   soundText: {fileID: 484279244}
   settingsKey: Music
+  soundTag: Music
+  audioPlayer: {fileID: 0}

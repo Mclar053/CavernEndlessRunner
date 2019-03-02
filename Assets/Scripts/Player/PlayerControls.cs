@@ -17,6 +17,11 @@ public class PlayerControls : MonoBehaviour
     int score;
     public Text newHighScoreText;
 
+    public AudioClip playerMove;
+    public AudioClip playerJump;
+    public AudioClip playerDeath1;
+    public AudioClip playerDeath2;
+
     Vector2 newPosition;
     float t;
 
@@ -80,15 +85,24 @@ public class PlayerControls : MonoBehaviour
                 AddScore(1);
 
                 moving = true;
-
             }
         }
-        else
+        else if (!dead)
         {
             t += Time.deltaTime / 0.05f;
             transform.position = Vector2.Lerp(transform.position, newPosition, t);
             if (transform.position.Equals(newPosition))
             {
+                // Play player moving sounds
+                if (switchSides)
+                {
+                    SoundManager.instance.RandomizePlayerSfx(playerJump);
+                }
+                else
+                {
+                    SoundManager.instance.RandomizePlayerSfx(playerMove);
+                }
+
                 moving = false;
                 switchSides = false;
             }
@@ -97,7 +111,7 @@ public class PlayerControls : MonoBehaviour
 
     public void KillPlayer()
     {
-        if (!switchSides)
+        if (!switchSides & !dead)
         {
             dead = true;
 
@@ -109,6 +123,7 @@ public class PlayerControls : MonoBehaviour
             }
 
             endGameDisplay.SetActive(true);
+            SoundManager.instance.RandomizePlayerSfx(playerDeath1, playerDeath2);
         }
     }
 

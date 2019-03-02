@@ -146,3 +146,7 @@ MonoBehaviour:
   textObject: {fileID: 0}
   highScore: {fileID: 0}
   newHighScoreText: {fileID: 0}
+  playerMove: {fileID: 8300000, guid: 1fe55e16e0b3f45c983f7e041b3491d7, type: 3}
+  playerJump: {fileID: 8300000, guid: a92d6dc3d07ec4361a982c4aa9caf649, type: 3}
+  playerDeath1: {fileID: 8300000, guid: e49866028577c4baa89de3f0713efff2, type: 3}
+  playerDeath2: {fileID: 8300000, guid: 6db332c55a62643b68c1633dfadf4f22, type: 3}

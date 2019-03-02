@@ -98,6 +98,7 @@ MonoBehaviour:
     type: 3}
   RockfallCrackSprite: {fileID: 21300032, guid: 037f2e7e885e74bf095551df3c51fbd8,
     type: 3}
+  crackAudio: {fileID: 8300000, guid: 2eaa29e51d5c24beea8ad42bbd4b3bc2, type: 3}
 --- !u!61 &8964161869876503997
 BoxCollider2D:
   m_ObjectHideFlags: 0

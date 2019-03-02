@@ -141,3 +141,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6e14fb37b60640018c46397f556298d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gemSound: {fileID: 8300000, guid: a89eac53043ff4f2da8bf2591fa0ce17, type: 3}

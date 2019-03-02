@@ -8,6 +8,7 @@ public class SoundSlider : MonoBehaviour
 
     public Text soundText;
     public string settingsKey;
+    public string soundTag;
 
     Slider slider;
 
@@ -42,5 +43,14 @@ public class SoundSlider : MonoBehaviour
     {
         soundText.text = Mathf.Round(slider.value * 100f).ToString() + "%";
         SaveSettings();
+
+        if(soundTag == "Sound")
+        {
+            SoundManager.instance.ChangeSoundVolume(PlayerPrefs.GetFloat("Sound"));
+        }
+        else if(soundTag == "Music")
+        {
+            SoundManager.instance.ChangeMusicVolume(PlayerPrefs.GetFloat("Music"));
+        }
     }
 }

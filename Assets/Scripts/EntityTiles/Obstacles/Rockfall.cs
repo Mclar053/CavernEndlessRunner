@@ -11,6 +11,8 @@ public class Rockfall : Obstacle
     float crackTime = 0.5f;
     float timeActivated;
 
+    public AudioClip crackAudio;
+
     Rockfall()
     {
         EntityName = EntityType.Rockfall;
@@ -25,6 +27,10 @@ public class Rockfall : Obstacle
     {
         if (cracked && timeActivated + crackTime < Time.time)
         {
+            float playerYPos = GameObject.FindGameObjectWithTag("Player").transform.position.y;
+            SoundManager.instance.ChangeSoundVolumeWithMultiplier(Mathf.Abs(1 / (playerYPos - transform.position.y + 1)));
+            SoundManager.instance.RandomizeSfx(crackAudio);
+
             // Create 3 rocks at the position of the parent but scattered 
             for (int i = 0; i < 3; i++)
             {
@@ -42,8 +48,8 @@ public class Rockfall : Obstacle
         if(coll.tag == "Player" && !cracked)
         {
             timeActivated = Time.time;
-            cracked = true;
             GetComponent<SpriteRenderer>().sprite = RockfallCrackSprite;
+            cracked = true;
         }
     }
 }
