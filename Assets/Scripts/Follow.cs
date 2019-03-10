@@ -20,21 +20,24 @@ public class Follow : MonoBehaviour {
 
     void FixedUpdate ()
     {
-        Vector3 newFollowerPosition = new Vector3(0, 0, Follower.transform.position.z);
-
-        // If the follower is following the X direction
-        if(followX)
+        if (!Followed.gameObject.GetComponent<PlayerControls>().IsPlayerDead())
         {
-            newFollowerPosition.x = Followed.position.x + modifierX;
-        }
+            Vector3 newFollowerPosition = new Vector3(0, 0, Follower.transform.position.z);
 
-        // If the follower if following the Y direction
-        if(followY)
-        {
-            newFollowerPosition.y = Followed.position.y + modifierY;
-        }
+            // If the follower is following the X direction
+            if (followX)
+            {
+                newFollowerPosition.x = Followed.position.x + modifierX;
+            }
 
-        // Set the follower's position
-        Follower.position = newFollowerPosition;
+            // If the follower if following the Y direction
+            if (followY)
+            {
+                newFollowerPosition.y = Followed.position.y + modifierY;
+            }
+
+            // Set the follower's position
+            Follower.position = newFollowerPosition;
+        }
     }
 }

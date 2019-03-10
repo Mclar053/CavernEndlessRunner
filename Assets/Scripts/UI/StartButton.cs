@@ -19,4 +19,14 @@ public class StartButton: MonoBehaviour
     {
         SceneManager.LoadScene("OptionsMenu");
     }
+
+    public void Credits()
+    {
+        SceneManager.LoadScene("Credits");
+    }
+
+    public void Instructions()
+    {
+        SceneManager.LoadScene("Instructions");
+    }
 }

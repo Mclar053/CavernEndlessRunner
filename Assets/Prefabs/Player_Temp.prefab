@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2773289831717400478}
   - component: {fileID: 716068025}
   - component: {fileID: 716068029}
+  - component: {fileID: 3328909515403313986}
   m_Layer: 9
   m_Name: Player_Temp
   m_TagString: Player
@@ -29,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 2773289831717400479}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.63, y: -4.03, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -71,12 +72,12 @@ SpriteRenderer:
   m_SortingLayerID: 128271865
   m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 5d843db5013c24af98adcddbaabb46f3, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4d1accc3411dd4608992a3af332b145e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.32, y: 0.64}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -97,16 +98,16 @@ BoxCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
+    border: {x: 0, y: 0, z: 0, w: 0.32}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
+    oldSize: {x: 0.32, y: 0.32}
+    newSize: {x: 0.32, y: 0.64}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.3, y: 0.26}
   m_EdgeRadius: 0
 --- !u!50 &716068025
 Rigidbody2D:
@@ -150,3 +151,23 @@ MonoBehaviour:
   playerJump: {fileID: 8300000, guid: a92d6dc3d07ec4361a982c4aa9caf649, type: 3}
   playerDeath1: {fileID: 8300000, guid: e49866028577c4baa89de3f0713efff2, type: 3}
   playerDeath2: {fileID: 8300000, guid: 6db332c55a62643b68c1633dfadf4f22, type: 3}
+  animator: {fileID: 3328909515403313986}
+--- !u!95 &3328909515403313986
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2773289831717400479}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f2d90f5428e3747c1b33920b85d5a13b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 1
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
