@@ -5,6 +5,7 @@ using UnityEngine;
 public class Gem : EntityTile
 {
     private int score;
+    public AudioClip gemSound;
 
     Gem()
     {
@@ -16,6 +17,8 @@ public class Gem : EntityTile
     {
         if (coll.gameObject.tag == "Player")
         {
+            SoundManager.instance.ChangeSoundVolumeWithMultiplier(1);
+            SoundManager.instance.PlaySingle(gemSound);
             coll.GetComponent<PlayerControls>().AddScore(score);
             Destroy(gameObject);
         }

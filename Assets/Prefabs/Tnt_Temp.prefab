@@ -145,3 +145,5 @@ MonoBehaviour:
     type: 3}
   InactiveSprite: {fileID: 21300014, guid: 037f2e7e885e74bf095551df3c51fbd8, type: 3}
   ActivateSprite: {fileID: 21300016, guid: 037f2e7e885e74bf095551df3c51fbd8, type: 3}
+  fuseAudio: {fileID: 8300000, guid: 00402804f21d7449697e66262a74d6b1, type: 3}
+  explodeAudio: {fileID: 8300000, guid: 521d380e9f1f7435ca9c364656528b19, type: 3}

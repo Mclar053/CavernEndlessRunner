@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PlayerControls : MonoBehaviour
@@ -11,12 +10,20 @@ public class PlayerControls : MonoBehaviour
     bool moving = false;
     bool dead = false;
     bool switchSides = false;
+    float moveTime;
 
     public GameObject endGameDisplay;
     public Text textObject;
     public Text highScore;
     int score;
     public Text newHighScoreText;
+
+    public AudioClip playerMove;
+    public AudioClip playerJump;
+    public AudioClip playerDeath1;
+    public AudioClip playerDeath2;
+
+    public Animator animator;
 
     Vector2 newPosition;
     float t;
@@ -29,6 +36,7 @@ public class PlayerControls : MonoBehaviour
         scoreboard = new Scoreboard();
         score = 0;
         highScore.text = "Highscore: " + scoreboard.GetScore();
+        animator.SetBool("switchSides", false);
     }
 
     // Update is called once per frame
@@ -36,69 +44,85 @@ public class PlayerControls : MonoBehaviour
     {
 
         // Take the first input given by the user
-        Touch touch = Input.touches[0];
+        if(Input.touchCount > 0)
+        {
+            Touch touch = Input.GetTouch(0);
 
-        if (dead)
-        {
-            GetComponent<SpriteRenderer>().color = new Color(0f, 0f, 0f);
-        }
-        else
-        {
-            GetComponent<SpriteRenderer>().color = new Color(255, 255, 255);
-        }
-
-        if (!moving && !dead)
-        {
-            // Check the user has tapped the screen
-            if (touch.phase == TouchPhase.Began)
+            if (!moving && !dead)
             {
-                t = 0;
-                // As the user has tapped the screen, they will move up one tile
-                Vector2 totalMovement = new Vector2(0, 0);
+                // Check the user has tapped the screen
+                if (touch.phase == TouchPhase.Began)
+                {
+                    t = 0;
+                    // As the user has tapped the screen, they will move up one tile
+                    Vector2 totalMovement = new Vector2(0, 0);
 
-                totalMovement.y += 0.5f;
+                    totalMovement.y += 0.5f;
 
-                // Check if they move left or right
-                bool userTouchedLeft = touch.position.x < Screen.width / 2;
+                    // Check if they move left or right
+                    bool userTouchedLeft = touch.position.x < Screen.width / 2;
 
-                if (!isPlayerLeft && userTouchedLeft)
-                { // If the player is on the right and the user touched the left side
-                    totalMovement.x = -4f;
-                    isPlayerLeft = true; // Player is now on the left
-                    switchSides = true;
+                    if (!isPlayerLeft && userTouchedLeft)
+                    { // If the player is on the right and the user touched the left side
+                        totalMovement.x = -3.64f;
+                        isPlayerLeft = true; // Player is now on the left
+                        switchSides = true;
+                        animator.SetBool("isJumping", true);
+                        moveTime = 0.2f;
+                    }
+                    else if (isPlayerLeft && !userTouchedLeft)
+                    { // If the player is on the left and the user touched the right side
+                        totalMovement.x = 3.64f;
+                        isPlayerLeft = false; // Player is now on the right
+                        switchSides = true;
+                        animator.SetBool("isJumping", true);
+                        moveTime = 0.2f;
+                    }
+                    else
+                    {
+                        animator.SetBool("isClimbing", true);
+                        moveTime = 0.05f;
+                    }
+
+                    // Set the new position
+                    newPosition = new Vector2(transform.position.x + totalMovement.x, transform.position.y + totalMovement.y);
+
+                    // Increase score
+                    AddScore(1);
+
+                    moving = true;
                 }
-                else if (isPlayerLeft && !userTouchedLeft)
-                { // If the player is on the left and the user touched the right side
-                    totalMovement.x = 4f;
-                    isPlayerLeft = false; // Player is now on the right
-                    switchSides = true;
-                }
-
-                // Set the new position
-                newPosition = new Vector2(transform.position.x + totalMovement.x, transform.position.y + totalMovement.y);
-
-                // Increase score
-                AddScore(1);
-
-                moving = true;
-
             }
         }
-        else
+
+        if (!dead && moving)
         {
-            t += Time.deltaTime / 0.05f;
+            t += Time.deltaTime / moveTime;
             transform.position = Vector2.Lerp(transform.position, newPosition, t);
             if (transform.position.Equals(newPosition))
             {
+                // Play player moving sounds
+                if (switchSides)
+                {
+                    SoundManager.instance.RandomizePlayerSfx(playerJump);
+                    animator.SetBool("isJumping", false);
+                }
+                else
+                {
+                    SoundManager.instance.RandomizePlayerSfx(playerMove);
+                    animator.SetBool("isClimbing", false);
+                }
+
                 moving = false;
                 switchSides = false;
+                GetComponent<SpriteRenderer>().flipX = !isPlayerLeft;
             }
         }
     }
 
     public void KillPlayer()
     {
-        if (!switchSides)
+        if (!switchSides & !dead)
         {
             dead = true;
 
@@ -110,7 +134,16 @@ public class PlayerControls : MonoBehaviour
             }
 
             endGameDisplay.SetActive(true);
+            SoundManager.instance.RandomizePlayerSfx(playerDeath1, playerDeath2);
+            GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+            GetComponent<Rigidbody2D>().gravityScale = 1;
+            AdManager.instance.ShowAdvert();
         }
+    }
+
+    public bool IsPlayerDead()
+    {
+        return dead;
     }
 
     public void ResetPlayer()

@@ -39,4 +39,9 @@ public class Scoreboard
         LoadScore();
         return highscore;
     }
+
+    public void ResetScoreboard()
+    {
+        PlayerPrefs.SetInt("Highscore", 0);
+    }
 }

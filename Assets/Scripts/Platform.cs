@@ -184,10 +184,13 @@ public class Platform : MonoBehaviour
     {
         if(coll.gameObject.tag == "Player")
         {
-            Vector2 newPosition = transform.position;
-            newPosition.y += HEIGHT_OF_PLATFORM * 3;
-            transform.position = newPosition;
-            RefreshPlatform();
+            if (!coll.gameObject.GetComponent<PlayerControls>().IsPlayerDead())
+            {
+                Vector2 newPosition = transform.position;
+                newPosition.y += HEIGHT_OF_PLATFORM * 3;
+                transform.position = newPosition;
+                RefreshPlatform();
+            }
         }
     }
 
