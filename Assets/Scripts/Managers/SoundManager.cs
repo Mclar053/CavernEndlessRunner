@@ -26,9 +26,14 @@ public class SoundManager : MonoBehaviour
 
         DontDestroyOnLoad(gameObject);
 
-        efxSource.volume = PlayerPrefs.GetFloat("Sound");
-        playerSource.volume = PlayerPrefs.GetFloat("Sound");
-        musicSource.volume = PlayerPrefs.GetFloat("Music");
+        float soundVolume, musicVolume;
+
+        soundVolume = PlayerPrefs.HasKey("Sound") ? PlayerPrefs.GetFloat("Sound") : 0.5f;
+        musicVolume = PlayerPrefs.HasKey("Music") ? PlayerPrefs.GetFloat("Music") : 0.5f;
+
+        efxSource.volume = soundVolume;
+        playerSource.volume = soundVolume;
+        musicSource.volume = musicVolume;
     }
 
     public void PlaySingle (AudioClip clip)
@@ -60,16 +65,21 @@ public class SoundManager : MonoBehaviour
     public void ChangeMusicVolume(float newValue)
     {
         musicSource.volume = newValue;
+        PlayerPrefs.SetFloat("Music", newValue);
     }
 
     public void ChangeSoundVolume(float newValue)
     {
         efxSource.volume = newValue;
         playerSource.volume = newValue;
+
+        PlayerPrefs.SetFloat("Sound", newValue);
     }
 
     public void ChangeSoundVolumeWithMultiplier (float multiplier)
     {
-        efxSource.volume = PlayerPrefs.GetFloat("Sound") * multiplier;
+        float soundVol = PlayerPrefs.HasKey("Sound") ? PlayerPrefs.GetFloat("Sound") : 0.5f;
+
+        efxSource.volume = soundVol * multiplier;
     }
 }

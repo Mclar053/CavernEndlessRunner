@@ -34,23 +34,17 @@ public class SoundSlider : MonoBehaviour
         soundText.text = Mathf.Round(slider.value * 100f).ToString() + "%";
     }
 
-    void SaveSettings()
-    {
-        PlayerPrefs.SetFloat(settingsKey, slider.value);
-    }
-
     void SetValue()
     {
         soundText.text = Mathf.Round(slider.value * 100f).ToString() + "%";
-        SaveSettings();
 
         if(soundTag == "Sound")
         {
-            SoundManager.instance.ChangeSoundVolume(PlayerPrefs.GetFloat("Sound"));
+            SoundManager.instance.ChangeSoundVolume(slider.value);
         }
         else if(soundTag == "Music")
         {
-            SoundManager.instance.ChangeMusicVolume(PlayerPrefs.GetFloat("Music"));
+            SoundManager.instance.ChangeMusicVolume(slider.value);
         }
     }
 }
